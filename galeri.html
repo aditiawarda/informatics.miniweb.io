@@ -2,5 +2,251 @@
 <html lang="en">
 <head>
 <title>Dokumentasi Foto | Teknik Informatika</title>
+<meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="style/images/cjr.png">
+<link rel="stylesheet" type="text/css" href="style/css/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="style/color/red.css" media="all">
+<link rel="stylesheet" type="text/css" media="screen" href="style/css/prettyPhoto.css">
+<link rel="stylesheet" type="text/css" href="style/type/museo.css" media="all">
+<link rel="stylesheet" type="text/css" href="style/type/ptsans.css" media="all">
+<link rel="stylesheet" type="text/css" href="style/type/charis.css" media="all">
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="style/css/ie7.css" media="all">
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="style/css/ie8.css" media="all">
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="style/css/ie9.css" media="all">
+<![endif]-->
+<script src="style/js/jquery-1.6.2.min.js"></script>
+<script src="style/js/jquery.masonry.min.js"></script>
+<script src="style/js/ddsmoothmenu.js"></script>
+<script src="style/js/transify.js"></script>
+<script src="style/js/jquery.prettyPhoto.js"></script>
+<script src="style/js/jquery.superbgimage.min.js"></script>
+<script src="style/js/jquery.slickforms.js"></script>
+<script>
+jQuery(document).ready(function ($) {
+    $('.forms').dcSlickForms();
+});
+</script>
+<script>
+$(document).ready(function () {
+    var
+    speed = 1000, // animation speed
+        $wall = $('#portfolio .items'),
+        masonryOptions = { // initial masonry options
+            itemSelector: '.box:not(.invis)',
+            animate: true,
+            animationOptions: {
+                duration: speed,
+                queue: false
+            }
+        };
+    $wall.imagesLoaded(function () {
+        $wall.masonry(masonryOptions);
+        // Create array of filters from link href
+        var arrFilter = [];
+        $('#filtering-nav a').each(function () {
+            fhash = $(this).attr('href').replace('#', '');
+            if (fhash != 'all') {
+                arrFilter.push(fhash);
+            }
+        });
+        //  Get the parameter value after the # symbol
+        var url = document.URL.split('#')[1];
+        if (url == undefined) {
+            url = 'all';
+        }
+        $('#filtering-nav a.' + url).parent().addClass('active');
+        if (jQuery.inArray(url, arrFilter) > '-1') {
+            // set masonry options animate to false
+            masonryOptions.animate = false;
+            // hide boxes that don't match the filter class
+            $wall.children().not('.' + url).toggleClass('invis').hide();
+        }
+        //	imageSetCss($(".box"));
+        // run masonry again
+        $wall.masonry(masonryOptions);
+        //	imageFadeIn($(".box"));
+        $wall.animate({
+            opacity: 1
+        }, 1000);
+    });
+    $('#filtering-nav a').click(function (e) {
+        var color = $(this).attr('class');
+        filterClass = '.' + color;
+        $('#filtering-nav li').removeClass('active');
+        $(this).parent().addClass('active');
+        if (filterClass == '.all') {
+            // show all hidden boxes
+            $wall.children('.invis').toggleClass('invis').fadeIn(speed);
+        } else {
+            // hide visible boxes 
+            $wall.children().not(filterClass).not('.invis').toggleClass('invis').fadeOut(speed);
+            // show hidden boxes
+            $wall.children(filterClass + '.invis').toggleClass('invis').fadeIn(speed);
+        }
+        $wall.masonry({
+            animate: true
+        });
+        // set hash in URL
+        location.hash = color;
+        e.preventDefault();
+    });
+});
+$.fn.imagesLoaded = function (a) {
+    var
+    b = this.find("img"),
+        c = [],
+        d = this,
+        e = b.length;
+    if (!b.length) {
+        a.call(this);
+        return this
+    }
+    b.one("load error", function () {
+        --e === 0 && (e = b.length, b.one("load error", function () {
+            --e === 0 && a.call(d)
+        }).each(function () {
+            this.src = c.shift()
+        }))
+    }).each(function () {
+        c.push(this.src), this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+    });
+    return this
+};
+</script>
+</head>
+<body>
+<div id="thumbs"> <a href="style/images/art/bc1.png">1</a> <a href="style/images/art/bc2.png">2</a> <a href="style/images/art/bc3.png">3</a> <a href="style/images/art/bc4.jpg">4</a></div>
+<div id="superbgimage">
+  <div class="scanlines"></div>
+</div>
+<div id="wrapper">
+  <div id="header">
+    <div class="logo"><a href="index.html"><img src="style/images/head.png" width="500" alt=""></a></div>
+    <div class="social">
+      <ul>
+        <li><a href="https://facebook.com/"><img src="style/images/icon-facebook.png" title="Facebook" alt=""></a></li>
+        <li><a href="https://twitter.com/"><img src="style/images/icon-twitter.png" title="Twitter" alt=""></a></li>
+        <li><a href="https://plus.google.com/"><img src="style/images/icon-googleplus.png" title="Google+" alt=""></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div id="menu" class="menu opacity">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+	  <li><a href="#">Tentang</a>
+        <ul>
+		  <li><a href="visimisi.html">Visi & Misi</a></li>
+          <li><a href="struktur.html">Struktur Organisasi</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Kuliah</a>
+        <ul>
+		  <li><a href="https://siakad.fst.uinsgd.ac.id/">Portal Akademik</a></li>
+          <li><a href="https://elearning.if.uinsgd.ac.id/">E-learning</a></li>
+        </ul>
+		<li><a href="#">Layanan</a>
+        <ul>
+		  <li><a href="http://sipantas.fst.uinsgd.ac.id/">Pendaftaran Sidang</a></li>
+		  <li><a href="http://transkrip.if.uinsgd.ac.id/">Permohonan Transkrip</a></li>
+		  <li><a href="http://suka.fst.uinsgd.ac.id/login.php">Survey Layanan</a></li>
+		  <li><a href="http://join.if.uinsgd.ac.id/index.php/join">Jurnal Informatika</a></li>
+        </ul>
+      </li>
+      </li>
+      <li><a href="galeri.html">Dokumentasi</a></li>
+    </ul>
+    <br style="clear: left">
+  </div>
+  <div id="container" class="opacity">
+    <h2>Dokumentasi Foto</h2>
+    <p>Kumpulan Foto dokumentasi sebagian kegitan dari staff Jurusan, Dosen serta Mahasiswa Teknik Informatika Universitas Islam Negeri Sunan Gunung Djati Bandung</p>
+    <div id="portfolio">
+      <ul id="filtering-nav">
+        <li>Kategori :</li>
+        <li><a class="all" href="#all">Semua</a></li>
+        <li><a class="cat1" href="#cat1">Jurusan</a></li>
+        <li><a class="cat2" href="#cat2">Mahasiswa</a></li>
+      </ul>
+      <div class="clear"></div>
+      <div class="items">
+        <div class="box col5 cat1"><a href="style/images/h1.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h1.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m1.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m1.jpg" alt=""></a></div>
+        <div class="box col5 cat1"><a href="style/images/h2.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h2.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m2.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m2.jpg" alt=""></a></div>
+        <div class="box col5 cat1"><a href="style/images/h3.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h3.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m3.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m3.jpg" alt=""></a></div>
+        <div class="box col5 cat1"><a href="style/images/h4.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h4.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m4.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m4.jpg" alt=""></a></div>
+        <div class="box col5 cat1"><a href="style/images/h10.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h10.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m5.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m5.jpg" alt=""></a></div>
+	<div class="box col5 cat1"><a href="style/images/h8.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style//images/h8.jpg" alt=""></a></div> 
+        <div class="box col5 cat2"><a href="style/images/m7.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m7.jpg" alt=""></a></div>
+	<div class="box col5 cat1"><a href="style/images/h5.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h5.jpg" alt=""></a></div>
+	<div class="box col5 cat2"><a href="style/images/m10.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m10.jpg" alt=""></a></div>
+        <div class="box col5 cat1"><a href="style/images/h7.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h7.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m6.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m6.jpg" alt=""></a></div>
+        <div class="box col5 cat1"><a href="style/images/h6.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h6.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m8.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m8.jpg" alt=""></a></div>
+	<div class="box col5 cat1"><a href="style/images/h9.jpg" rel="prettyPhoto" title="Jurusan"><span class="overlay zoom"></span><img src="style/images/h9.jpg" alt=""></a></div>
+        <div class="box col5 cat2"><a href="style/images/m9.jpg" rel="prettyPhoto" title="Mahasiswa"><span class="overlay zoom"></span><img src="style/images/m9.jpg" alt=""></a></div>
+</div>
+</div>
+    <div class="clear"></div>
+    <div id="footer">
+      <div class="footer-top"></div>
+      <div class="one-fourth">
+        <h3>Layanan</h3>
+        <ul class="latest-posts">
+          <li><a href="http://sipantas.fst.uinsgd.ac.id/"><span class="date"><img src="style/images/daftar.png" width="40" height="40" alt=""></span><p><b>Pendaftaran Sidang</b><br>Kunjungi >></br></p> </a></li>
+          <li><a href="http://transkrip.if.uinsgd.ac.id/"><span class="date"><img src="style/images/nilai.png" width="40" height="40" alt=""></span><p><b>Permohonan Transkrip</b><br>Kunjungi >></br></p> </a></li>
+          <li><a href="http://suka.fst.uinsgd.ac.id/login.php"><span class="date"><img src="style/images/survey.png" width="40" height="40" alt=""></span><p><b>Survey Layanan</b><br>Kunjungi >></br></p> </a></li>
+          <li><a href="http://join.if.uinsgd.ac.id/index.php/join"><span class="date"><img src="style/images/jurnal.png" width="40" height="40" alt=""></span><p><b>Jurnal Informatika</b><br>Kunjungi >></br></p> </a></li>
+        </ul>
+		 
+      </div>
+      <div class="one-fourth">
+        <h3>Dokumentasi Foto</h3>
+        <ul class="flickr">
+          <li><div class="box col8 cat1"><a href="style/images/h1.jpg" rel="prettyPhoto" title="Ketua Jurusan"><span class="overlay zoom"></span><img src="style/images/h1.jpg" width="50" height="50" alt=""></a></div></li>
+          <li><div class="box col8 cat1"><a href="style/images/h2.jpeg" rel="prettyPhoto" title="Monitor 2018"><span class="overlay zoom"></span><img src="style/images/h2.jpeg" width="50" height="50" alt=""></a></div></li>
+          <li><div class="box col8 cat1"><a href="style/images/h3.jpeg" rel="prettyPhoto" title="Kuliah Umum"><span class="overlay zoom"></span><img src="style/images/h3.jpeg" width="50" height="50" alt=""></a></div></li>
+          <li><div class="box col8 cat1"><a href="style/images/h4.jpeg" rel="prettyPhoto" title="Sosialisasi KP"><span class="overlay zoom"></span><img src="style/images/h4.jpeg" width="50" height="50" alt=""></a></div></li>
+	  <li><div class="box col8 cat1"><a href="style/images/h5.jpeg" rel="prettyPhoto" title="Rapat Dosen"><span class="overlay zoom"></span><img src="style/images/h5.jpeg" width="50" height="50" alt=""></a></div></li>
+	  <li><div class="box col8 cat1"><a href="style/images/h6.jpg" rel="prettyPhoto" title="Pelatihan Dosen"><span class="overlay zoom"></span><img src="style/images/h6.jpg" width="50" height="50" alt=""></a></div></li>
+          <li><div class="box col8 cat1"><a href="style/images/h7.jpeg" rel="prettyPhoto" title="Sosialisasi KP"><span class="overlay zoom"></span><img src="style/images/h7.jpeg" width="50" height="50" alt=""></a></div></li>
+	  <li><div class="box col8 cat1"><a href="style/images/h8.jpeg" rel="prettyPhoto" title="Sosialisasi KP"><span class="overlay zoom"></span><img src="style/images/h8.jpeg" width="50" height="50" alt=""></a></div></li>
+	  <li><div class="box col8 cat1"><a href="style/images/h9.jpeg" rel="prettyPhoto" title="Monitor 2018r"><span class="overlay zoom"></span><img src="style/images/h9.jpeg" width="50" height="50" alt=""></a></div></li>
+	</ul>
 
+      <div class="content">
+      <br><br><a href="galeri.html" class="button red">Foto Lainnya</a>
+      </div>
+      </div>
+      <div class="one-fourth">
+        <h3>Tentang</h3>
+        <p style="text-align:justify;">Jurusan Teknik Informatika Universitas Islam Negeri Sunan Gunung Djati Bandung Berdiri Tahun 2000 dan diresmikan 2001 sebelum berdiri Fakultas Sains dan Teknologi pada tahun 2005 Teknik Informatika masuk di Fakultas Tarbiyah dan Keguruan, Jurusan Teknik Informatika adalah jurusan pertama yang berdiri di Fakultas Sains dan Teknologi</p>
+      </div>
+      <div class="one-fourth last">
+      <h3>UIN SGD Bandung</h3>
+        <ul class="latest-posts">
+          <li><span class="date"><img src="style/images/uin.png" width="60" height="60" alt=""></span><p style="text-align:justify;">IAIN SGD Bandung didirikan pada tanggal 8 April 1968 M bertepatan dengan 10 Muharram 1388 H berdasarkan Keputusan Menteri Agama RI Nomor 56 Tahun 1968. Kehadiran IAIN Sunan Gunung Djati Bandung merupakan...</p> </li><div class="content">
+      <a href="http://uinsgd.ac.id/tentang-uin-sgd-bdg/tentang-kami/sejarah-singkat-uin-dan-iain/" class="button red">Lihat Selengkapnya</a>
+      </div>
+        
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div id="copyright" class="opacity">
+    <p>Copyright 2018 DigiClone Developer - Teknik Informatika</p>
+  </div>
+</div>
+<script src="style/js/scripts.js"></script>
+</body>
 </html>
